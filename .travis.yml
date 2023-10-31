@@ -1,0 +1,17 @@
+language: generic 
+sudo: required
+services:
+  - docker
+
+
+before_install:
+  - docker build -t vilastadoori/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true vilastadoori/react-test npm test
+
+after_success:
+  - docker build -t vilastadoori/multi-client ./client
+  - docker build -t vilastadoori/multi-nginx ./nginx
+  - docker build -t vilastadoori/multi-server ./server
+  - docker build -t vilastadoori/multi-worker ./worker
