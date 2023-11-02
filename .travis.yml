@@ -15,3 +15,13 @@ after_success:
   - docker build -t vilastadoori/multi-nginx ./nginx
   - docker build -t vilastadoori/multi-server ./server
   - docker build -t vilastadoori/multi-worker ./worker
+
+# Log in to the docker CLI
+
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID"  --password-stdin
+# take those images and push them to docker hub
+
+  - docker push vilastadoori/multi-client
+  - docker push vilastadoori/multi-nginx
+  - docker push vilastadoori/multi-server
+  - docker push vilastadoori/multi-worker

@@ -1,0 +1,61 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+
+        {
+            "name": "client",
+            "image": "vilastadoori/multi-client",
+            "hostname": "client",
+            "essential": false
+
+        },
+
+        {
+
+            "name" : "server",
+            "image": "vilastadoori/multi-server",
+            "hostname": "api",
+            "essential" : false
+
+
+        },
+
+        {
+
+            "name": "worker",
+            "image": "vilastadoori/multi-worker",
+            "hostname": "worker",
+            "essential": false
+
+        },
+
+        {
+            "name":"ngnix",
+            "image": "vilastadoori/multi-ngnix",
+            "hostname": "ngnix",
+            "essential": true,
+            "portMappings" :[
+
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+
+                }
+
+
+            ],
+            "links":["client", "server"]
+
+
+
+        }
+
+
+
+    ]
+
+
+
+
+
+}
